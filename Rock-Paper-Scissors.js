@@ -11,3 +11,10 @@ function getComputerChoice(){
     return choice;
 }
 getComputerChoice();
+
+function checkWinner(playerselection,computerselection){
+    if(playerselection===computerselection){
+        return "It's a tie!";
+    }
+
+}
