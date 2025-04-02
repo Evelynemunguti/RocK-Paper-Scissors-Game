@@ -27,3 +27,10 @@ if(
     else{return "Computer Wins!";
 }
 }
+
+const playerselection = "Paper"; // You can get this from user input
+const computerselection = getComputerChoice();
+
+console.log(`You chose: ${playerselection}`);
+console.log(`Computer chose: ${computerselection}`);
+console.log(checkWinner(playerselection, computerselection));  
