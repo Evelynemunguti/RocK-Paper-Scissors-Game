@@ -33,4 +33,22 @@ const computerselection = getComputerChoice();
 
 console.log(`You chose: ${playerselection}`);
 console.log(`Computer chose: ${computerselection}`);
-console.log(checkWinner(playerselection, computerselection));  
+console.log(checkWinner(playerselection, computerselection)); 
+
+
+
+function playRound(playerselection, computerselection){
+    const result = checkWinner(playerselection, computerselection);
+    if (result =="It's a tie!"){
+        return "It's a tie!";
+    }
+
+    else if(result=="Player Wins!"){
+        return `Player Wins! ${playerselection} beats ${computerselection}`;
+    }
+    else{
+        return `Computer Wins! ${computerselection} beats ${playerselection}`;
+    }
+    
+}
+
