@@ -16,5 +16,14 @@ function checkWinner(playerselection,computerselection){
     if(playerselection===computerselection){
         return "It's a tie!";
     }
-
+if(
+(playerselection==="Rock" && computerselection==="Scissors")|| 
+(playerselection==="Paper" && computerselection==="Rock")||
+(playerselection==="Scissors" && computerselection==="Paper")
+)
+{
+      return "Player Wins!";
+}
+    else{return "Computer Wins!";
+}
 }
