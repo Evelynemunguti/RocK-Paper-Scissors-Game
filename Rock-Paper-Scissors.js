@@ -1,6 +1,13 @@
 //We create a function that will randomly return either 'rock', 'paper', or 'scissors'.
 //
-console.log("Hello Eve,Lets play a game");
+// Rock beats scissors
+//Paper beats rock
+//Scissors beats paper
+//We create a function that will take two parameters, playerSelection and computerSelection
+//and will return the result of the game.
+
+
+console.log("Hello Eve!");
 
 //this are all the choices we have
 const options=["Rock","Paper","Scissors"];
@@ -52,13 +59,51 @@ function playRound(playerselection, computerselection){
     
 }
 
+function getPlayerChoice(){
+
+let validatedInput = false;
+while(validatedInput == false){
+ const choice = prompt("Please enter your choice (Rock, Paper or Scissors): ");
+   if (choice == null){
+       continue;
+}   
+const choiceInLowerCase = choice.toLowerCase();
+if (options.includes(choiceInLowerCase)){
+validatedInput = true;
+ return choiceInLowerCase;
+}
+ }
+  }    
+
+
 function playGame(){
+
+    let playerScore = 0;
+    let computerScore = 0;
     console.log("Welcome to the game");
     for(let i=0; i<5; i++){
-        const playerselection = "Rock"; // You can get this from user input
+        const playerselection = getPlayerChoice(); // You can get this from user input
         const computerselection = getComputerChoice();
         playRound(playerselection, computerselection);
         console.log(playRound(playerselection, computerselection));
+        if(checkWinner(playerselection, computerselection) == "Player Wins!"){
+            playerScore++;
+        }
+        else if(checkWinner(playerselection, computerselection) == "Computer Wins!"){
+            computerScore++;
+        }
     }
+
+console.log("Game Over");
+if(playerScore > computerScore){
+    console.log("Player Wins the game!");
 }
+else if(playerScore < computerScore){
+    console.log("Computer Wins the game!");
+}
+else{
+    console.log("It's a tie!");
+}
+}
+
 playGame();
