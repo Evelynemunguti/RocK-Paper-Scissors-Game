@@ -14,7 +14,7 @@
     //We will use the confirm function to ask the user if they want to play again
 
 
-    const options = ["rock", "paper", "scissors"];
+    const options = ["Rock", "Paper", "Scissors"];
 let playerScore = 0;
 let computerScore = 0;
 
@@ -35,9 +35,9 @@ function getWinner(player, computer) {
   if (player === computer) {
     return "It's a tie!";
   } else if (
-    (player === "rock" && computer === "scissors") ||
-    (player === "paper" && computer === "rock") ||
-    (player === "scissors" && computer === "paper")
+    (player === "Rock" && computer === "Scissors") ||
+    (player === "Paper" && computer === "Rock") ||
+    (player === "Scissors" && computer === "Paper")
   ) {
     return "Player Wins!";
   } else {
@@ -73,6 +73,21 @@ function playRound(playerSelection) {
     finalResult.textContent = "😢 Computer wins the game!";
   }
 }
+
+document.getElementById("refresh").addEventListener("click", () => {
+    // Reset the scores
+    playerScore = 0;
+    computerScore = 0;
+  
+    // Clear the result messages
+    roundResult.textContent = "";
+    finalResult.textContent = "";
+  
+    // Update the scores in the UI
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+  });
+  
 
 // Add event listeners to buttons
 document.getElementById("Rock").addEventListener("click", () => playRound("Rock"));
