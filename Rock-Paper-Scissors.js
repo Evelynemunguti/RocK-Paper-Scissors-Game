@@ -29,4 +29,20 @@
         const randomIndex = Math.floor(Math.random() * options.length);
         return options[randomIndex];
       }
+
+      function getWinner(player,computer){
+
+        if (player === computer){
+            return "It's a tie!";
+        }
+        else if (
+            (player === "rock" && computer === "scissors") ||
+            (player === "paper" && computer === "rock") ||
+            (player === "scissors" && computer === "paper")
+          ) {
+            return "Player Wins!";
+          } else {
+            return "Computer Wins!";
+          }
+      }
     
