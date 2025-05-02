@@ -23,3 +23,10 @@
     const computerScoreDisplay = document.getElementById("computerScore");
     const roundResult = document.getElementById("roundResult");
     const finalResult = document.getElementById("finalResult");
+
+
+    function getComputerChoice(){
+        const randomIndex = Math.floor(Math.random() * options.length);
+        return options[randomIndex];
+      }
+    
