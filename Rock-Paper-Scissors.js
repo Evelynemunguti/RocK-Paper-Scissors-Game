@@ -6,104 +6,90 @@
 //We create a function that will take two parameters, playerSelection and computerSelection
 //and will return the result of the game.
 
+// function startGame(){
+    //This function will start the game
+    //We will use the prompt function to get the user input
+    //We will use the console.log function to display the result of the game
+    //We will use the alert function to display the result of the game
+    //We will use the confirm function to ask the user if they want to play again
 
-console.log("Hello Eve!");
 
-//this are all the choices we have
-const options=["Rock","Paper","Scissors"];
+    const options = ["Rock", "Paper", "Scissors"];
+let playerScore = 0;
+let computerScore = 0;
 
-//this function will represent the computer choice
-function getComputerChoice(){
-    const choice = options[Math.floor(Math.random()*options.length)];
-    return choice;
-}
-getComputerChoice();
+// Get elements from HTML
+const playerScoreDisplay = document.getElementById("playerScore");
+const computerScoreDisplay = document.getElementById("computerScore");
+const roundResult = document.getElementById("roundResult");
+const finalResult = document.getElementById("finalResult");
 
-function checkWinner(playerselection,computerselection){
-    if(playerselection===computerselection){
-        return "It's a tie!";
-    }
-if(
-(playerselection==="Rock" && computerselection==="Scissors")|| 
-(playerselection==="Paper" && computerselection==="Rock")||
-(playerselection==="Scissors" && computerselection==="Paper")
-)
-{
-      return "Player Wins!";
-}
-    else{return "Computer Wins!";
-}
+// Generate computer's choice
+function getComputerChoice() {
+  const randomIndex = Math.floor(Math.random() * options.length);
+  return options[randomIndex];
 }
 
-const playerselection = "Paper"; // You can get this from user input
-const computerselection = getComputerChoice();
-
-// console.log(`You chose: ${playerselection}`);
-// console.log(`Computer chose: ${computerselection}`);
-// console.log(checkWinner(playerselection, computerselection)); 
-
-
-
-function playRound(playerselection, computerselection){
-    const result = checkWinner(playerselection, computerselection);
-    if (result =="It's a tie!"){
-        return "It's a tie!";
-    }
-
-    else if(result=="Player Wins!"){
-        return `Player Wins! ${playerselection} beats ${computerselection}`;
-    }
-    else{
-        return `Computer Wins! ${computerselection} beats ${playerselection}`;
-    }
-    
+// Decide who wins
+function getWinner(player, computer) {
+  if (player === computer) {
+    return "It's a tie!";
+  } else if (
+    (player === "Rock" && computer === "Scissors") ||
+    (player === "Paper" && computer === "Rock") ||
+    (player === "Scissors" && computer === "Paper")
+  ) {
+    return "Player Wins!";
+  } else {
+    return "Computer Wins!";
+  }
 }
 
-function getPlayerChoice(){
+// Main game logic
+function playRound(playerSelection) {
+  if (playerScore >= 5 || computerScore >= 5) return;
 
-let validatedInput = false;
-while(validatedInput == false){
- const choice = prompt("Please enter your choice (Rock, Paper or Scissors): ");
-   if (choice == null){
-       continue;
-}   
-const choiceInLowerCase = choice.toLowerCase();
-if (options.includes(choiceInLowerCase)){
-validatedInput = true;
- return choiceInLowerCase;
-}
- }
-  }    
+  const computerSelection = getComputerChoice();
+  const result = getWinner(playerSelection, computerSelection);
 
+  if (result === "Player Wins!") {
+    playerScore++;
+    roundResult.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
+  } else if (result === "Computer Wins!") {
+    computerScore++;
+    roundResult.textContent = `Computer Wins! ${computerSelection} beats ${playerSelection}`;
+  } else {
+    roundResult.textContent = "It's a tie!";
+  }
 
-function playGame(){
+  // Update scores on screen
+  playerScoreDisplay.textContent = playerScore;
+  computerScoreDisplay.textContent = computerScore;
 
-    let playerScore = 0;
-    let computerScore = 0;
-    console.log("Welcome to the game");
-    for(let i=0; i<5; i++){
-        const playerselection = getPlayerChoice(); // You can get this from user input
-        const computerselection = getComputerChoice();
-        playRound(playerselection, computerselection);
-        console.log(playRound(playerselection, computerselection));
-        if(checkWinner(playerselection, computerselection) == "Player Wins!"){
-            playerScore++;
-        }
-        else if(checkWinner(playerselection, computerselection) == "Computer Wins!"){
-            computerScore++;
-        }
-    }
-
-console.log("Game Over");
-if(playerScore > computerScore){
-    console.log("Player Wins the game!");
-}
-else if(playerScore < computerScore){
-    console.log("Computer Wins the game!");
-}
-else{
-    console.log("It's a tie!");
-}
+  // Check if anyone won the game
+  if (playerScore === 5) {
+    finalResult.textContent = "🎉 You are the winner!";
+  } else if (computerScore === 5) {
+    finalResult.textContent = "😢 Computer wins the game!";
+  }
 }
 
-playGame();
+document.getElementById("refresh").addEventListener("click", () => {
+    // Reset the scores
+    playerScore = 0;
+    computerScore = 0;
+  
+    // Clear the result messages
+    roundResult.textContent = "";
+    finalResult.textContent = "";
+  
+    // Update the scores in the UI
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+  });
+  
+
+// Add event listeners to buttons
+document.getElementById("Rock").addEventListener("click", () => playRound("Rock"));
+document.getElementById("Paper").addEventListener("click", () => playRound("Paper"));
+document.getElementById("Scissors").addEventListener("click", () => playRound("Scissors"));
