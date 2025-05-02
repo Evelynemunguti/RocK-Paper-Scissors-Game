@@ -13,5 +13,7 @@ Paper beats Rock
 
 If both the player and the computer choose the same option, it's a tie.
 
+https://evelynemunguti.github.io/RocK-Paper-Scissors-Game/
+
 
 
